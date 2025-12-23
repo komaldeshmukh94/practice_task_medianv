@@ -37,6 +37,12 @@ let arr=[1,2,3]
 // Adding element in array
 arr.push(4)
 
+// creating a subarray from a array
+arr.slice(0,2)
+
+// Check it is array or not
+arr.isArray()
+
 // Adding element at starting of array
 arr.unshift(0)
 
@@ -58,6 +64,7 @@ let arr_b=[4,5,6]
 
 a.concat(b)
 // result=[1,2,3,4,5,6]
+
 
 // destructuring 
 // Used to unpack value from array,properties from object.

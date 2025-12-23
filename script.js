@@ -65,6 +65,15 @@ let arr_b=[4,5,6]
 a.concat(b)
 // result=[1,2,3,4,5,6]
 
+// flat method
+let new_arr=[[2,3],[2,1],[3,5]]
+let res=arr.flat()
+// res=[2,3,2,1,3,5]
+
+// delete method 
+delete new_arr[0]
+//the deleted element place will be undefined
+
 
 // destructuring 
 // Used to unpack value from array,properties from object.
@@ -97,3 +106,5 @@ let arr2=[4,5,6]
 
 let arr3=[...arr1,...arr2]
 console.log(arr3)
+
+

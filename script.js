@@ -108,3 +108,88 @@ let arr3=[...arr1,...arr2]
 console.log(arr3)
 
 
+// Event Loop in Js
+
+// javascript is a single threaded language to perform asynchronous operation in javascript event loop is used.
+
+// Event loop manages multiple task without blocking the main thread.
+
+// asynchronous operation
+// fetching data from API.
+// Setting Time for a specific task using setTimeout,setInterval.
+
+// Working of event loop
+//1.call stack=>used to perform function execution follow LIFO.
+
+//2.Task Queue=>callback like setTimeout and setInterval are kept in Task queue until execution.
+
+//3.Microtask Queue=>Microtask Queue has higher priority than task queue.used to execute Promises.
+
+//4. Event Loop=>Event loop continuosly check call stack and Task Queue and MicrotaskQueue if any task is present in Task or microtask queue it push that task to call stack.
+
+// Coding Example how event loop works
+
+console.log("start")
+setTimeout(()=>{
+    console.log("setTimeout")
+},1000)
+const promise=new Promise((resolve,reject)=>{
+    resolve("promise resolved")
+})
+promise.then((value)=>console.log(value))
+console.log("end")
+
+/*
+start
+end
+promise resolved=>promise are kept in microtask queue for execution,execute first.
+setTimeout=>send to web api ,kept in callback Queue for execution has less priority than microtask queue.
+*/
+
+
+
+// what is Web API
+// setTimeout,setInterval,fetch,Local Storage,Session Storage
+
+// setTimeout=>set a time after the time the callback will execute.
+
+setTimeout(()=>{
+  console.log("setTimeout executed")
+},1000)
+
+// setInterval=>set a Interval after the interval the callback will be executed.
+ 
+setInterval(()=>{
+  console.log("setInterval is executing after interval of 1 sec")
+},1000)
+
+// setImmediate=>when we need to execute task as soon as possible we use setImmediate function.
+
+setImmediate(()=>{
+  console.log("setImmediate executed")
+},1000)
+
+// Local Storage=>local storage is used to save permanent data in web storage(client side.)
+// Use Cases=>Login authentication(to check user is logged in or not)
+
+// Local storage Method
+// setItem=>set key value pair
+localStorage.setItem("username","Komal Deshmukh")
+
+// getItem=>with key we can access value
+localStorage.getItem("username")
+
+// removeItem=>Remove key value pair
+localStorage.removeItem("username")
+
+// clear=>clear all key value pair
+localStorage.clear()
+
+// Session Storage=>session storage is used to save temporary data in web storage(client side)
+
+
+
+
+
+
+

@@ -187,7 +187,219 @@ localStorage.clear()
 
 // Session Storage=>session storage is used to save temporary data in web storage(client side)
 
+// Async Javascript
 
+// Callbacks
+// Callback is a function passed as an argument to another function.
+// In javascript Callback is needed to handle asynchronous Operation.
+
+//Example
+function displayname(name)
+{
+ console.log(name)   
+}
+function displayfullname(callback)
+{
+    callback("komal")
+}
+displayfullname(displayname)
+
+
+// Callback Hell(pyramid of doom)
+// When their is too many nested callback it is called callback Hell.
+
+// Promise=>Promise is the solution of callback Hell.
+// A promise is used to perform asynchronous operation
+// Promise represent eventual completion or failure of a task.
+
+// Promise has 3 states
+// Pending=>Initial State(neither fulfilled nor pending).
+// Fulfilled=>promise resolved successfully.
+// Rejected=>promise rejected.
+
+// coding example
+
+let newpromise=new Promise((resolve,reject)=>{
+  resolve("Promise Resolved Successfully")
+})
+
+// how to access result of a promise
+// .then & .catch is used to access result of a promise.
+
+newpromise.then((value)=>console.log(value)).catch((error)=>console.log(error))
+
+// Methods of promise
+// all=>promise.all=>Takes iterable of promises and return a single promise.
+// if all promise are fullfilled it will return fullfilled.
+// if anyone promise is rejected it will return rejected with first rejection
+
+let newpromise1=new Promise((resolve,reject)=>{
+    resolve("error")
+})
+
+let newpromise2=new Promise((resolve,reject)=>{
+    resolve("error")
+})
+
+let newpromise3=new Promise((resolve,reject)=>{
+    resolve("error")
+})
+
+// newpromise.then((value)=>console.log(value)).catch((error)=>console.log(error))
+
+Promise.all([newpromise1,newpromise2,newpromise3]).then((value)=>{
+   return console.log(value)
+}).catch((err)=>console.log(err))
+
+// promise.allSettled
+
+// Wait for all promises to finish return the status of the promise.
+
+let newpromise1=new Promise((resolve,reject)=>{
+    resolve("error")
+})
+
+let newpromise2=new Promise((resolve,reject)=>{
+    resolve("error")
+})
+
+let newpromise3=new Promise((resolve,reject)=>{
+    resolve("error")
+})
+
+// newpromise.then((value)=>console.log(value)).catch((error)=>console.log(error))
+
+Promise.allSettled([newpromise1,newpromise2,newpromise3]).then((value)=>{
+   return console.log(value)
+}).catch((err)=>console.log(err))
+
+// output=>
+//   [
+//   { status: 'fulfilled', value: 'error' },
+//   { status: 'fulfilled', value: 'error' },
+//   { status: 'fulfilled', value: 'error' }
+// ]
+
+// promise.race()
+// it also takes an iterable promise return the first resolved or rejected promise.
+
+let newpromise1=new Promise((resolve,reject)=>{
+    resolve("promise resolved 1")
+})
+
+let newpromise2=new Promise((resolve,reject)=>{
+    resolve("promise resolve 2")
+})
+
+let newpromise3=new Promise((resolve,reject)=>{
+    resolve("promise resolve 3")
+})
+
+// newpromise.then((value)=>console.log(value)).catch((error)=>console.log(error))
+
+Promise.race([newpromise1,newpromise2,newpromise3]).then((value)=>{
+   return console.log(value)
+}).catch((err)=>console.log(err))
+
+// output:-promise resolved 1
+
+// promise.any()
+// It takes iterable of promises resolve if any promise resolve give result as first fullfillment.
+// rejects if "all" promises rejects.(ignore rejection only reject when all promises rejects.)
+
+// Coding Example
+let newpromise1=new Promise((resolve,reject)=>{
+    reject("promise rejected 1")
+})
+
+let newpromise2=new Promise((resolve,reject)=>{
+    reject("promise rejected 2")
+})
+
+let newpromise3=new Promise((resolve,reject)=>{
+    reject("promise rejected 3")
+})
+
+Promise.any([newpromise1,newpromise2,newpromise3]).then((value)=>{
+   return console.log(value)
+}).catch((err)=>console.log(err))
+
+// async/await
+// async await is modern js syntax built on top of promise,it help use to write a cleaner readable syntax to show a asynchronous code in synchronous way.
+
+let promise1=new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        resolve("first step")
+    },3000)
+})
+
+let promise2=new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        resolve("second step")
+    },5000)
+})
+
+let promise3=new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        resolve("Third step")
+    },7000)
+})
+
+async function display(){
+    let result =await promise1
+    console.log(result)
+    let result1=await promise2
+    console.log(result1)
+    let result3=await promise3
+    console.log(result3)
+}
+display()
+
+
+// Error handling
+// error is handled using try catch and finally block.
+
+// 1.try block=>The code in which their is chance of error is written in try block.
+// 2.catch block=>The error occur what code we have to execute is written in catch block.
+// 3.finally block=>the code written in finally block will excute in any case either their will be error or not.
+
+
+// Coding Example
+
+let promise1=new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        resolve("first step")
+    },3000)
+})
+
+let promise2=new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        resolve("second step")
+    },5000)
+})
+
+let promise3=new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        resolve("Third step")
+    },7000)
+})
+
+async function display(){
+    try{
+    let result =await promise1
+    console.log(resul)
+    let result1=await promise2
+    console.log(result1)
+    let result3=await promise3
+    console.log(result3)
+    }
+    catch(error)
+    {
+        console.log("error",error)
+    }
+    
+}
+display()
 
 
 

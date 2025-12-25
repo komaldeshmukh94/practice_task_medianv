@@ -401,6 +401,50 @@ async function display(){
 }
 display()
 
+// Typescript
+// javascript is a loosely typed language,that's why we use Typescript for typesafety.
+// Typescript code will be converted to javascript.
+
+// Types in TypesScript
+// Boolean:-Used for true and false value.
+let c:boolean=true;
+
+// Number:-Used for both normal and floating point number.
+let num:number=2;
+
+// String:-Represent string value.
+let str:string="komal";
+
+// BigInt:-Represent Number larger than 2^53-1.
+
+
+// Symbol:used to define unique value.
+let key:symbol=Symbol("name")
+let key1:symbol=Symbol("name")
+obj={
+  key:"komal"
+}
+
+
+// array in typescript
+let str_arr:string[]=["a","b","c","d","e"]
+str_arr.push("f")
+console.log(arr)
+
+// if readonly is used no operation will be performed on array.
+let str_arr1:readonly string[]=["a","b","c","d","e"]
+arr.push("f")
+console.log(arr)
+// Type inference => Type inference is a feature in  typescript  where typescript automatically defines the type of variable.
+
+// Object in Typescript
+const obj:{name:string,class:string,age:number}={
+name:"abc",
+class:"a",
+age:20,
+}
+obj[name]=20
+
 
 
 

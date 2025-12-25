@@ -445,7 +445,155 @@ age:20,
 }
 obj[name]=20
 
+// How to define function in Typescript
+function add(a:number,b:number):number
+{
+    return a+b
+}
+let result:number=add(1,2)
+console.log(result)
+
+
+// Typescript is a superset of javascript.
+// Typescript is a development tool the code is compiled into javascript.
+// Types in Typescript
+// 1.null
+// 2.undefined
+// 3.Void
+// 4.Object
+// 5.Array
+// 6.Tuple
+
+// any=>it stop the type checking.
 
 
 
+
+
+// Interface in Typescript
+// Interface is used to define the structure of a object & function in Typescript.
+
+// This structure can be reused for other object as well
+interface Info{
+    name:string,
+    surname:string,
+    age:number
+}
+
+let studentInfo:Info={
+    name:"komal",
+    surname:"Deshmukh",
+    age:20
+}
+
+let employee:Info={
+    name:"abc",
+    surname:"xyz",
+    age:23
+}
+
+// If we need to add more properties in interface structure for a object we can extend the interface and create a new specific interface.
+
+interface studentInfo extends Info{
+  className:string
+}
+
+studentInfo["className"]="A"
+console.log(studentInfo)
+
+// Output
+/*
+{
+  "name": "komal",
+  "surname": "Deshmukh",
+  "age": 20,
+  "className": "A"
+} 
+*/ 
+
+
+// Union Type
+// when we define multiple data type for a single variable then we use union and it is called union data type.
+
+
+let x:string|number|boolean
+x=true
+console.log(x)
+
+
+// type in Typescript
+//we can use union with type
+
+type a={
+    c:string,
+    d:string,
+}
+ type b={
+    e:string,
+    f:string,
+ }
+
+ type c=a | b
+
+/*
+type c={
+ c:string,
+ d:string,
+ e:string,
+f:string,
+}
+*/
+
+// diffrence between type & interface
+// interface=>can't use intersection.
+// type=>can't use union.
+
+
+// enum in typescript
+// define set of named constant
+// enum is used to define constant value.only constant value will be used any other value will not be used.
+enum e_name{
+firstname="komal",
+lastname="Deshmukh",
+}
+
+let emp_name:e_name=e_name.firstname;
+
+// optional props
+// optional properties in typescript is a property which may or may not be provided.
+// it is marked as ?
+
+let obj:{name:string,surname?:string}={
+name:"komal"
+}
+
+console.log(obj)
+
+// In this example surname is optional.if name is not eneterd it will give a error.
+
+// Api Contract.
+
+interface Ratings {
+  rate: number;
+  count: number;
+}
+
+interface ResponseType {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: Ratings;
+}
+
+async function get(): Promise<ResponseType> {
+  const result = await fetch("https://fakestoreapi.com/products/1");
+  const response: ResponseType = await result.json();
+  console.log(response);
+  return response;
+}
+
+get();
 

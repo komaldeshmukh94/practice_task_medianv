@@ -597,3 +597,81 @@ async function get(): Promise<ResponseType> {
 
 get();
 
+// Generics in Typescript
+// generics are used to create reusable component in typescript or function with help of which we can work with multiple "data types".
+
+// Coding example.
+function identity<T>(value: T): T {
+  return value;
+}
+
+identity<string>("Hello");
+identity<number>(100);
+identity<boolean>(true);
+
+// Access Modifier
+// public:accessed anywhere
+
+class User {
+  public name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+const user1 = new User("Komal");
+console.log(user1.name);
+
+// private:accessed only in same class.
+class BankAccount {
+  private balance: number = 0;
+
+  deposit(amount: number) {
+    this.balance += amount;
+  }
+}
+
+// protected:accessed in child class.
+class Employee {
+  protected salary: number;
+
+
+  constructor(salary: number) {
+    this.salary = salary;
+  }
+}
+
+class Manager extends Employee {
+  getSalary() {
+    return this.salary; // Allowed
+  }
+}
+const manager = new Manager(50000);
+// manager.salary Not accessible outside
+
+
+// classes in Typescript
+
+// Classes in TypeScript are blueprints used to create objects with defined properties and methods.They support object-oriented programming by organizing and reusing code efficiently.
+
+// coding example of classes
+class Student {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  getDetails() {
+    return `Name: ${this.name}, Age: ${this.age}`;
+  }
+}
+
+const student1 = new Student("Komal", 22);
+console.log(student1.getDetails());
+
+// constructor=>constructor is the first method invoked when a object is created.
+// getDetails=>a function created called with help created object.

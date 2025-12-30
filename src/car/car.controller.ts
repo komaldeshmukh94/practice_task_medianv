@@ -1,40 +1,62 @@
-import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import {CarService} from "./car.service"
+
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Patch,
+  Param,
+  Body,
+  Query,
+  ParseIntPipe,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { CarService } from './car.service';
 import { CarDto } from './car.dto';
-import { LargeNumberLike } from 'crypto';
-import { Body,Query } from '@nestjs/common';
+import { UpdateCarDto } from './update-car.dto';
 
 @Controller('car')
 export class CarController {
-// Injecting carservice in car controller 
-constructor(private carService:CarService){}
+  constructor(private readonly carService: CarService) {}
 
-@Get('cars')
-public getCars(){
-return this.carService.getCars()
-}
+  @Get('cars')
+  getCars() {
+    return this.carService.getCars();
+  }
 
-@Post()
-public postCar(@Body() car:CarDto)
-{
-this.carService.postCar(car)
-}
+  @Post()
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  postCar(@Body() car: CarDto) {
+    return this.carService.postCar(car);
+  }
 
-@Get(':id')
-public getCarById(@Param('id') id:number)
-{
-return this.carService.getCarById(id)
-}
+  @Get(':id')
+  getCarById(@Param('id', ParseIntPipe) id: number) {
+    return this.carService.getCarById(id);
+  }
 
-@Delete(':id')
-public deleteCarById(@Param('id') id:number){
-this.carService.deleteCarById(id)
-}
+  @Delete(':id')
+  deleteCarById(@Param('id', ParseIntPipe) id: number) {
+    return this.carService.deleteCarById(id);
+  }
 
-@Put(':id')
-public putCarById(@Param('id') id:number,@Query() query){
-const propertyName=query.property_name;
-const propertyValue=query.property_value;
-return this.carService.putCarById(id,propertyName,propertyValue)
-}
+  @Put(':id')
+  putCarById(
+    @Param('id', ParseIntPipe) id: number,
+    @Query('property_name') propertyName: keyof CarDto,
+    @Query('property_value') propertyValue: string,
+  ) {
+    return this.carService.putCarById(id, propertyName, propertyValue);
+  }
+
+  @Patch(':id')
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  patchCarById(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCarDto: UpdateCarDto,
+  ) {
+    return this.carService.patchCarById(id, updateCarDto);
+  }
 }

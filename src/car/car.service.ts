@@ -1,45 +1,66 @@
-import { Injectable,HttpException} from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { CarDto } from './car.dto';
 import { CARS } from './cars.mock';
+import { UpdateCarDto } from './update-car.dto';
 
 @Injectable()
 export class CarService {
-private cars=CARS;
-public  getCars(){
+  private cars: CarDto[] = CARS;
+
+  getCars() {
     return this.cars;
-}
+  }
 
-public postCar(car){
-    return this.cars.push(car);
-}
+  postCar(car: CarDto) {
+    this.cars.push(car);
+    return car;
+  }
 
-public getCarById(id:number){
-    const car=this.cars.find((car) => { return car.id==id})
-    if(car)
-    {
-        throw new HttpException("Not Found",404);
+  getCarById(id: number) {
+    const car = this.cars.find(car => car.id === id);
+    if (!car) {
+      throw new HttpException('Car Not Found', HttpStatus.NOT_FOUND);
     }
     return car;
-}
+  }
 
-
-public deleteCarById(id:number){
-    const index=this.cars.findIndex((car)=> car.id==id)
-    if(index===-1)
-    {
-        throw new HttpException("Not Found",404);
+  deleteCarById(id: number) {
+    const index = this.cars.findIndex(car => car.id === id);
+    if (index === -1) {
+      throw new HttpException('Car Not Found', HttpStatus.NOT_FOUND);
     }
-    this.cars.splice(index,1)
-    return this.cars;
+    return this.cars.splice(index, 1);
+  }
+putCarById(id: number, propertyName: keyof CarDto, propertyValue: string) {
+  const car = this.getCarById(id);
+
+  switch (propertyName) {
+    case 'id':
+      const newId = Number(propertyValue);
+      if (isNaN(newId)) {
+        throw new HttpException('Invalid value for id', HttpStatus.BAD_REQUEST);
+      }
+      car.id = newId;
+      break;
+    case 'brand':
+    case 'color':
+    case 'model':
+      car[propertyName] = propertyValue;
+      break;
+    default:
+      throw new HttpException('Invalid property name', HttpStatus.BAD_REQUEST);
+  }
+
+  return car;
 }
 
-public putCarById(id:number ,propertyName:string,propertyValue:string){
-    const index=this.cars.findIndex((car) => car.id==id)
-    if(index===-1)
-    {
-        throw new HttpException("Not Found",404);
-    }
-    this.cars[index][propertyName]=propertyValue;
-    return this.cars;
+
+  patchCarById(id: number, updateData: UpdateCarDto) {
+    const car = this.getCarById(id);
+    Object.assign(car, updateData);
+    return car;
+  }
 }
 
-}
+
+

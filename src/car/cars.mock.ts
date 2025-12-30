@@ -1,8 +1,14 @@
-export const CARS=[
-{
-    id:'1',
-    brand:'BMW',
-    color:'gold',
-    model:'BMW X5',
-},
+export const CARS = [
+  {
+    id: 1,
+    brand: 'Maruti',
+    color: 'White',
+    model: 'Swift',
+  },
+  {
+    id: 2,
+    brand: 'Hyundai',
+    color: 'Black',
+    model: 'i20',
+  },
 ];

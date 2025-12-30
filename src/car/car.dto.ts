@@ -1,7 +1,21 @@
 // DTO is a data transfer object used to define object
-export class CarDto{
-    readonly id:number;
-    readonly brand:string;
-    readonly color:string;
-    readonly model:string;
+// car.dto.ts
+// Added Validation Pipes
+import { IsInt, IsString, IsNotEmpty } from 'class-validator';
+export class CarDto {
+  @IsInt()
+  id: number;
+
+  @IsString()
+  @IsNotEmpty()
+  brand: string;
+
+  @IsString()
+  @IsNotEmpty()
+  color: string;
+
+  @IsString()
+  @IsNotEmpty()
+  model: string;
 }
+

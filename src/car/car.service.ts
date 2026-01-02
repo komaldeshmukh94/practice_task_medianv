@@ -31,28 +31,11 @@ export class CarService {
     }
     return this.cars.splice(index, 1);
   }
-putCarById(id: number, propertyName: keyof CarDto, propertyValue: string) {
-  const car = this.getCarById(id);
-
-  switch (propertyName) {
-    case 'id':
-      const newId = Number(propertyValue);
-      if (isNaN(newId)) {
-        throw new HttpException('Invalid value for id', HttpStatus.BAD_REQUEST);
-      }
-      car.id = newId;
-      break;
-    case 'brand':
-    case 'color':
-    case 'model':
-      car[propertyName] = propertyValue;
-      break;
-    default:
-      throw new HttpException('Invalid property name', HttpStatus.BAD_REQUEST);
+ putCarById(id: number, updateData: UpdateCarDto) {
+    const car = this.getCarById(id);
+    Object.assign(car, updateData);
+    return car;
   }
-
-  return car;
-}
 
 
   patchCarById(id: number, updateData: UpdateCarDto) {
